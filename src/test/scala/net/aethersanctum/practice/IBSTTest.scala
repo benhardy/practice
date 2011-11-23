@@ -2,9 +2,12 @@ package net.aethersanctum.practice
 
 import org.junit.Test
 import org.junit.Assert._
-
+import org.apache.commons.logging.Log
+import org.apache.commons.logging.LogFactory
 
 class IBSTTest {
+  val LOG = LogFactory.getLog(getClass)
+
   @Test
   def testTree {
     val empty = new ImmutableBinarySearchTree[String]()
@@ -19,14 +22,14 @@ class IBSTTest {
     }
 
     // inorder traversal
-    tree.foreach(println)
+    tree.foreach(item => LOG.info(item))
 
     // append each item to the tree to a stringbuilder, in order. should result in alphabetical order
     val combined = tree.foldLeft(new StringBuilder) {
       (buf, item) => buf append item append " "
     }.toString
 
-    println("inorder traversal results in: " + combined)
+    LOG.info("inorder traversal results in: " + combined)
     assertEquals("fish jellyfish kelp sand shark squid ", combined)
   }
 
